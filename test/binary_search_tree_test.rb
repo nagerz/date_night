@@ -10,6 +10,12 @@ class BinarySearchTreeTest < Minitest::Test
     assert_instance_of BinarySearchTree, tree
   end
 
+  def test_hash_class
+    tree = BinarySearchTree.new
+
+    assert_equal Hash, tree.movies.class
+  end
+
   def test_tree_insert
     tree = BinarySearchTree.new
 
