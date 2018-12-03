@@ -1,5 +1,5 @@
 class NewNode
-  attr_reader :score, :title, :left, :right
+  attr_accessor :score, :title, :left, :right
 
   def initialize(score, title)
     @score = score
