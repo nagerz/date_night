@@ -77,4 +77,34 @@ class BinarySearchTree
     #end
   end
 
+  def max(max_node = @root)
+    if max_node.nil?
+      return nil
+    elsif max_node.right.nil?
+      return {max_node.title => max_node.score}
+    else
+      max(max_node.right)
+    end
+  end
+
+  def min(min_node = @root)
+    if min_node.nil?
+      return nil
+    elsif min_node.left.nil?
+      return {min_node.title => min_node.score}
+    else
+      min(min_node.left)
+    end
+  end
+
+  def sort(current_node = @root, current_score = 0)
+    sort_hash = Hash.new
+    if current_node.nil?
+      return nil
+    elsif current_node.left.nil?
+      sort_hash << {current_node.title => min_node.score}
+    else
+      min(min_node.left)
+    end
+  end
 end
