@@ -107,4 +107,21 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal sort_hash, tree.sort
   end
 
+  def test_load
+    tree = BinarySearchTree.new
+
+    assert_equal 99, tree.load('./lib/movies.txt')
+
+    assert_equal true, tree.include?(16)
+    assert_equal 3, tree.depth_of(67)
+    assert_equal 2, tree.depth_of(11)
+    assert_equal 5, tree.depth_of(58)
+    assert_equal 4, tree.depth_of(86)
+
+    max_expected = {"The Little Engine That Could" => 100}
+    min_expected = {"Cruel Intentions"=>0}
+    assert_equal max_expected, tree.max
+    assert_equal min_expected, tree.min
+  end
+
 end

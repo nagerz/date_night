@@ -1,4 +1,5 @@
 require './lib/new_node'
+require './lib/movie_generator'
 require 'pry'
 
 class BinarySearchTree
@@ -97,14 +98,34 @@ class BinarySearchTree
     end
   end
 
-  def sort(current_node = @root, current_score = 0)
-    sort_hash = Hash.new
+  # def sort(current_node = @root, current_score = 0)
+  #   sort_hash = Hash.new
+  #   if current_node.nil?
+  #     return nil
+  #   elsif current_node.left.nil?
+  #     sort_hash << {current_node.title => min_node.score}
+  #   else
+  #     min(min_node.left)
+  #   end
+  # end
+
+  def sort(current_node = @root, sort_array = [])
     if current_node.nil?
-      return nil
-    elsif current_node.left.nil?
-      sort_hash << {current_node.title => min_node.score}
+      return sort_array
     else
-      min(min_node.left)
+      sort(current_node.left, sort_array)
+      sort_array << {current_node.title => current_node.score}
+      sort(current_node.right, sort_array)
+      sort_array
     end
   end
+
+  def load(textfile)
+    movies = MovieGenerator.new(textfile).make_movies_array
+    movies.each do |movie|
+      insert(movie[0], movie[1])
+    end
+    movies.count
+  end
+
 end
